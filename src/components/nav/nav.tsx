@@ -30,9 +30,9 @@ const menuItems = [
 
 export default function SiteNav() {
   return (
-    <Navbar expand="lg" className="navbar-dark bg-primary">
+    <Navbar expand="lg" className="navbar-dark bg-primary pt-4 pb-4 fs-4">
       <Container>
-        <Navbar.Brand href="/">Vue Du Vallon</Navbar.Brand>
+        <Navbar.Brand href="/" className="fs-2">Vue Du Vallon</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">

@@ -4,18 +4,25 @@ import styles from "./page.module.css";
 
 export default function Home() {
   return (
-    <Container>
-      <Row>
-        <div className={styles.backgroundImage}>
-
+    <div>
+      <div className={styles.backgroundImage}>
+        <div className={styles.centerPanel} >
+          <h1 className={styles.masterHeading}>Vue Du Vallon</h1>
+          <h2 className="text-primary text-center">Chambres d'hôtes</h2>
         </div>
-      </Row>
-      <Row>
-        <Col>
-          <h1 className="text-danger fw-bold">Home</h1>
-          <Btn type="primary"> new btn</Btn>
-        </Col>
-      </Row>
-    </Container>
+        <Container>
+          <Row >
+
+          </Row>
+          <Row>
+            <Col>
+
+              <Btn type="primary"> new btn</Btn>
+            </Col>
+          </Row>
+        </Container>
+      </div>
+
+    </div>
   );
 }
