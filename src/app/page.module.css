@@ -4,7 +4,7 @@
 
 .backgroundImage {
   background-image: url("/home/Vue Du Vallon Chambres dHotes Bersac Sur Rivalier.jpg");
-  height: 100vh;
+  height: calc(100vh - 180px);
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
@@ -12,6 +12,7 @@
 }
 
 .centerPanel {
+  margin-top: -2rem;
   background-color: white;
   margin-left: auto;
   margin-right: auto;
@@ -21,18 +22,30 @@
 }
 
 @media (min-width: 750px) {
+  .centerPanel {
+    margin-top: -11rem;
+  }
+
   .backgroundImage {
     background-image: url("/home/background-image.webp");
   }
 }
 
 @media (min-width: 1400px) {
+  .centerPanel {
+    margin-top: 13rem;
+  }
+
   .backgroundImage {
     background-image: url("/home/bersac chambres dhotes.jpg");
   }
 }
 
 @media (min-width: 1580px) {
+  .centerPanel {
+    margin-top: 15rem;
+  }
+
   .backgroundImage {
     background-image: url("/home/bersac chambres dhotes airial front.jpg");
   }
