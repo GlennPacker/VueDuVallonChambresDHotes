@@ -1,5 +1,4 @@
 import { ReactNode } from "react";
-import { Container } from "react-bootstrap";
 import styles from "./cta.module.css";
 
 type props = {
