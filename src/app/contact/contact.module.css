@@ -1,0 +1,43 @@
+.pageLayout {
+  margin-top: 3rem;
+  width: 90%;
+  max-width: 1620px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+
+.phone {
+  grid-area: phone;
+}
+
+.email {
+  grid-area: email;
+}
+
+.social {
+  grid-area: social;
+}
+
+.form {
+  grid-area: form;
+  margin-bottom: 2rem;
+}
+
+.layout {
+  display: grid;
+  gap: 1rem;
+  grid-template-areas:
+    "form"
+    "phone"
+    "email"
+    "social";
+}
+
+@media (min-width: 700px) {
+  .layout {
+    grid-template-areas:
+      "form form form"
+      "phone email social";
+  }
+}

@@ -1,0 +1,22 @@
+.formControl {
+  width: 100% !important;
+  box-shadow: 0 0 0 0 #00000000 !important;
+  border-color: #00000000 !important;
+  border-bottom: 1px solid #efefef !important;
+}
+
+.formControl:focus {
+  width: 100% !important;
+  border-color: #00000000 !important;
+  border-bottom: 3px solid var(--primary) !important;
+  outline: 0;
+  transition: all 0.3s ease-in;
+}
+
+.formControl::after {
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  margin-top: -2px;
+  vertical-align: middle;
+}

@@ -6,17 +6,13 @@ const menuItems = [
     label: 'Accommodation',
     link: '/accommodation'
   },
-  {
-    label: 'Activities',
-    link: '/activities'
-  },
+  // {
+  //   label: 'Activities',
+  //   link: '/activities'
+  // },
   {
     label: 'Attractions',
     link: '/attractions'
-  },
-  {
-    label: 'Gallery',
-    link: '/gallery'
   },
   {
     label: 'Contact',

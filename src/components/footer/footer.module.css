@@ -1,0 +1,32 @@
+.pageContainer {
+  display: flex;
+  background-color: #47a2d6;
+  color: white;
+  height: 80px;
+  max-height: 76px;
+  overflow: hidden;
+}
+
+.container {
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.links {
+  display: flex;
+  justify-content: space-between;
+  width: 300px;
+  color: rgb(248, 209, 69);
+}
+
+@media (max-width: 800px) {
+  .container {
+    flex-direction: column-reverse;
+  }
+
+  .links {
+    width: 100%;
+  }
+}
