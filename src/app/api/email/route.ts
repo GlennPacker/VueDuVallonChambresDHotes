@@ -4,17 +4,6 @@ import Mail from 'nodemailer/lib/mailer';
 
 export async function POST(req: Request) {
   const body = await req.json();
-    
-  if (typeof body === 'string') {
-    // TODO: write review request email
-  //  return  sendReviewEmail(body);  
-  }
-
-  const { email } = body; 
-
-  if (!email) {
-    return await sendRatingEmail(body);
-  }
 
   return await sendContactEmail(body);
 }
@@ -63,10 +52,6 @@ const sendEmail = async (
   } catch (err) {
     return NextResponse.json({ error: err }, { status: 500 });
   }
-}
-
-const sendRatingEmail = (body: any) => {
-  return sendEmail(JSON.stringify(body), `Rating Email`)
 }
 
 const sendContactEmail = (body: any) => {
