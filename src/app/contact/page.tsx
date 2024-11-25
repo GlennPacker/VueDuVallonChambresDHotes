@@ -23,25 +23,9 @@ export default function Contact() {
           <div className={styles.email}>
             <strong>Email:</strong>
             <div className="ps-5">
-              Glenn@VueDuVallon.fr
+              info@VueDuVallon.fr
             </div>
           </div>
-          <div className={styles.social}>
-            <strong>Social:</strong>
-            <div className="ps-5">
-              <a
-                href="https://www.facebook.com/profile.php?id=61557315565267"
-                target="_blank"
-              >
-                <img
-                  height="25px"
-                  src="/facebook.png"
-                  alt="link to facebook"
-                />
-              </a>
-            </div>
-          </div>
-
         </div>
       </div>
     </main >

@@ -30,14 +30,13 @@
   grid-template-areas:
     "form"
     "phone"
-    "email"
-    "social";
+    "email";
 }
 
 @media (min-width: 700px) {
   .layout {
     grid-template-areas:
-      "form form form"
-      "phone email social";
+      "form form"
+      "phone email";
   }
 }
