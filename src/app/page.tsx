@@ -17,19 +17,21 @@ export default async function Home() {
           See More
         </Btn>
       </div>
-  }, {
-    alt: "Activities",
-    img: "activities.webp",
-    link: "/activities",
-    node:
-      <div>
-        <h2>Activities</h2>
-        <p>Activities offered by the Chambres d'hôtes</p>
-        <Btn>
-          See More
-        </Btn>
-      </div>
-  }, {
+  },
+  // {
+  //   alt: "Activities",
+  //   img: "activities.webp",
+  //   link: "/activities",
+  //   node:
+  //     <div>
+  //       <h2>Activities</h2>
+  //       <p>Activities offered by the Chambres d'hôtes</p>
+  //       <Btn>
+  //         See More
+  //       </Btn>
+  //     </div>
+  // }, 
+  {
     alt: "Location & Attractions",
     img: "attractions.webp",
     link: "/attractions",
