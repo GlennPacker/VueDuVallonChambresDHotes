@@ -8,6 +8,7 @@ module.exports = {
     "@next/next/no-img-element": "off",
     "react/no-unescaped-entities": "off",
     "react-hooks/exhaustive-deps": "off",
-    "no-useless-escape": "off"
+    "no-useless-escape": "off",
+    "no-octal-escape": "off"
   }
 }

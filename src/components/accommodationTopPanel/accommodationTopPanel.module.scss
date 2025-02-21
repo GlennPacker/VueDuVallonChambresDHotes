@@ -1,0 +1,21 @@
+.topPanel {
+  text-align: center;
+
+  .topPanelPic {
+    width: 198px;
+    height: 270px;
+    margin-right: 2px;
+  }
+}
+
+
+@media (max-width: 1100px) {
+  .topPanel {
+    text-align: left;
+
+    .topPanelPic {
+      width: 150px;
+      height: 230px;
+    }
+  }
+}

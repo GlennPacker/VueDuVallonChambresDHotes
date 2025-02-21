@@ -1,0 +1,55 @@
+.roomContainer {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  grid-template-rows: 45px 1fr;
+  grid-template-areas:
+    "room room"
+    "roomfeatures photos";
+  gap: 20px 0;
+  margin-bottom: 2rem;
+}
+
+.roomfeatures {
+  grid-area: roomfeatures;
+
+}
+
+.photos {
+  grid-area: photos;
+}
+
+.room {
+  grid-area: room;
+  margin-left: 20vw;
+}
+
+
+@media (max-width: 1100px) {
+  .roomContainer {
+    grid-template-areas:
+      "room room"
+      "roomfeatures photos";
+  }
+
+  .room {
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 750px) {
+  .roomContainer {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 25px 1fr 1fr;
+    grid-template-areas: "room" "roomfeatures" "photos";
+    gap: 20px 0;
+    margin-bottom: 2rem;
+    font-size: 1.2rem;
+  }
+
+  .room {
+    margin-left: 0;
+  }
+}
