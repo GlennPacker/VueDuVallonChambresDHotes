@@ -56,7 +56,7 @@ const ReservationForm = () => {
     setNumbersHidden([RoomType.Single, RoomType.Double].includes(roomType));
   }
 
-  const onSubmit = async (data: ReservationFormModel) => {
+  const onSubmit = async (data) => {
     if (data.roomType === RoomType.Single) {
       data.numberOfAdults = 1;
       data.numberOfChildren = 0;
