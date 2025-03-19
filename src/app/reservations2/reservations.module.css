@@ -1,0 +1,19 @@
+.reservationsContainer {
+  display: flex;
+  background-color: rgb(248, 209, 69);
+}
+
+.reservationItem {
+  color: white;
+  display: inline-block;
+  margin-left: auto;
+  margin-right: auto;
+  text-decoration: underline;
+  font-size: 1.5rem;
+  display: flex;
+  padding: .2rem 0;
+}
+
+.email {
+  text-decoration: underline;
+}

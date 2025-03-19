@@ -23,6 +23,9 @@ const Attractions = () => {
         val={filter}
       />
       <Btn href="/attractions/lakes">Lakes</Btn>
+      <Btn href="/attractions/restaurants">Restaurants</Btn>
+      <Btn href="/attractions/beach">Beach</Btn>
+      <Btn href="/attractions/localTowns">Local Towns</Btn>
     </div>
 
     <AttractionGrid filter={filter} />
