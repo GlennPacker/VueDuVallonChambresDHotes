@@ -1,14 +1,13 @@
 import { Availability, RoomSelected } from "@/types/reservationFormModels";
 import { rooms } from "@/constants/Rooms";
 import { dateDiffInDays } from "@/services/availabilityUtils";
-import RoomTable from "../roomTable2/roomTable";
+import RoomTable from "../roomTable/roomTable";
 
 type props = {
   availability: Availability | null,
   roomSelection: (roomSelected: RoomSelected) => void, 
 }
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const AvailableRooms = ({ availability, roomSelection }: props) => {
   if(!availability) return <></>
 
@@ -27,6 +26,13 @@ const AvailableRooms = ({ availability, roomSelection }: props) => {
 
   const currentPrices = prices.find(p => p.priceBand === priceBand);
   const dayCount = dateDiffInDays(availability.startDate, availability.endDate);
+
+  const reserve = async room => await roomSelection({
+      ...availability,
+      room: room.room,
+      pricePerNight: room.pricePerNight,
+      totalPrice: room.pricePerNight * dayCount
+    });
  
   const displayRooms = availableRooms.map(room => {
     const pricePerNight = currentPrices[room.room][`${+availability.numberOfAdults + +availability.numberOfChildren}`];
@@ -41,12 +47,7 @@ const AvailableRooms = ({ availability, roomSelection }: props) => {
     <RoomTable 
       room={room} 
       key={room.room} 
-      // reserve={ () => roomSelection({
-      //   ...availability,
-      //   room: room.room,
-      //   pricePerNight: room.pricePerNight,
-      //   totalPrice: room.pricePerNight * dayCount
-      // })}
+      reserveAction={ () => reserve(room)}
     />
   ))
 }

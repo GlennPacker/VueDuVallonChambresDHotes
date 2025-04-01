@@ -8,7 +8,7 @@ import RoomPhotos from "@/components/roomPhotos/roomPhotos";
 import BtnClient from "@/components/button/ButtonClient";
 
 export default async function roomTable(props) {
-  const { room, reserve } = props;
+  const { room, reserveAction } = props;
 
   return <div>
     <div className={room.pricePerNight ? styles.prices : styles.noPrices}>
@@ -21,7 +21,7 @@ export default async function roomTable(props) {
         </>
         }
 
-        <BtnClient click={() => reserve(room)}>Reserve</BtnClient>
+        <BtnClient click={() => reserveAction(room)}>Reserve</BtnClient>
       </div>
       <div className={styles.room} >
         <h3>{room.roomType}</h3>
