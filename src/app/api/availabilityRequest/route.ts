@@ -17,7 +17,6 @@ export async function POST(
   if(!room) {
     return new Response('Room Not Found', {
       status: 404,
-      headers: { 'Content-Type': 'application/json'}
     })
   }
 
@@ -29,10 +28,9 @@ export async function POST(
     ]);
   
   if(!availability.every(r => r)) {
-    return new Response('No longer available'), {
-      status: 400,
-      headers: { 'Content-Type': 'application/json'}
-    }
+    return new Response('No longer available', {
+        status: 400,
+    });
   }
 
   try {
@@ -45,9 +43,12 @@ export async function POST(
     return new Response(null, { status: 204 });
   } catch (e) {
     const { message } = e as { message: string };
+
     return new Response(JSON.stringify({
       message: 'unable to send email',
       error: message
-    }), {status: 500});
+    }), {
+      status: 500,
+    });
   }
 }

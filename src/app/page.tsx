@@ -2,7 +2,7 @@
 import { Col, Container, Row } from "react-bootstrap";
 import styles from "./page.module.css";
 import Cta from "@/components/cta/cta";
-import Btn from "@/components/button/Button";
+import BtnServer from "@/components/button/ButtonServer";
 
 export default async function Home() {
   const cta = [{
@@ -13,9 +13,9 @@ export default async function Home() {
       <div>
         <h2>Accommodation</h2>
         <p>The rooms at the Chambres d'hôtes</p>
-        <Btn>
+        <BtnServer>
           See More
-        </Btn>
+        </BtnServer>
       </div>
   },
   // {
@@ -26,9 +26,9 @@ export default async function Home() {
   //     <div>
   //       <h2>Activities</h2>
   //       <p>Activities offered by the Chambres d'hôtes</p>
-  //       <Btn>
+    //       <BtnServer>
   //         See More
-  //       </Btn>
+    //       </BtnServer>
   //     </div>
   // }, 
   {
@@ -39,9 +39,9 @@ export default async function Home() {
       <div>
         <h2>Location & Attractions</h2>
         <p>Attractions and places to go.</p>
-        <Btn>
+        <BtnServer>
           See More
-        </Btn>
+        </BtnServer>
       </div>
   }]
 

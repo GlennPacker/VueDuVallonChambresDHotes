@@ -10,7 +10,7 @@ type props = {
   click?: () => void;
 }
 
-export default function Btn({
+export default function BtnClient({
   type = "primary",
   classes = '',
   href,

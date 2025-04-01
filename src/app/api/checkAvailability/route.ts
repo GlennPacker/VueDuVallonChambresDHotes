@@ -32,10 +32,10 @@ export async function POST(
   }
 
   if (!availableRooms.length) {
-    return new Response('No Rooms'), {
+    return new Response('No Rooms', {
       status: 404,
       headers: { 'Content-Type': 'application/json'}
-    }
+    })
   }
 
   return new Response(JSON.stringify({availableRooms}), {

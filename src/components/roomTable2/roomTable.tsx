@@ -1,15 +1,11 @@
-"use server";
 import styles from './roomTable.module.scss';
 import CheckedList from "../checkedList/checkedList";
 import Icon from '@mdi/react';
 import { mdiAccountOutline } from '@mdi/js';
 import Beds from '@/components/beds/beds';
 import RoomPhotos from "@/components/roomPhotos/roomPhotos";
-import BtnClient from "@/components/button/ButtonClient";
 
-export default async function roomTable(props) {
-  const { room, reserve } = props;
-
+export default async function roomTable({ room }) {
   return <div>
     <div className={room.pricePerNight ? styles.prices : styles.noPrices}>
       <div className={styles.price}>
@@ -20,8 +16,6 @@ export default async function roomTable(props) {
           <div>Price Per Night €{room.pricePerNight}</div>
         </>
         }
-
-        <BtnClient click={() => reserve(room)}>Reserve</BtnClient>
       </div>
       <div className={styles.room} >
         <h3>{room.roomType}</h3>

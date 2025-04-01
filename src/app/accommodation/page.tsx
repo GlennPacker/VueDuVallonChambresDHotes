@@ -1,5 +1,6 @@
+
 import styles from "./accommodation.module.scss";
-import RoomTable from "@/components/roomTable/roomTable";
+import RoomTable from "@/components/roomTable2/roomTable";
 import AccommodationSidePanel from "@/components/accommodationSidePanel/accomodationSidePanel";
 import AccommodationTopPanel from "@/components/accommodationTopPanel/accomodationTopPanel";
 import { rooms } from "@/constants/Rooms";
@@ -24,5 +25,3 @@ export default function accommodation() {
     </div>
   </div>
 }
-
-// export default accommodation;
