@@ -1,18 +1,46 @@
-.roomContainer {
+.noPrices {
+  margin-top:2rem;
   width: 100%;
   display: grid;
   grid-template-columns: 300px 1fr;
   grid-template-rows: 45px 1fr;
+  
+  gap: 20px 0;
+  margin-bottom: 2rem;
   grid-template-areas:
     "room room"
     "roomfeatures photos";
+
+    .price {
+      display: none;
+    }
+}
+
+.prices {
+  background-color: #f8f8f8;
+    padding: 1.5rem;
+    border-radius: 1rem;
+    
+  width: 100%;
+  display: grid;
+  grid-template-columns: 300px 230px 1fr;
+  grid-template-rows: 1fr;  
   gap: 20px 0;
   margin-bottom: 2rem;
+  grid-template-areas:
+    "roomfeatures price photos";
+
+    .room {
+      display: none;
+    }
+}
+
+.price {
+  grid-area: price;
 }
 
 .roomfeatures {
   grid-area: roomfeatures;
-
 }
 
 .photos {
@@ -21,15 +49,21 @@
 
 .room {
   grid-area: room;
-  margin-left: 20vw;
+  display: flex;
+  justify-content: center;
 }
 
 
 @media (max-width: 1100px) {
-  .roomContainer {
+  .noPrices {
     grid-template-areas:
       "room room"
       "roomfeatures photos";
+  }
+
+  .prices {
+    grid-template-areas: "roomfeatures price" "photos photos";
+    grid-template-columns: 300px 1fr;
   }
 
   .room {
@@ -38,7 +72,7 @@
 }
 
 @media (max-width: 750px) {
-  .roomContainer {
+  .noPrices {
     width: 100%;
     display: grid;
     grid-template-columns: 1fr;

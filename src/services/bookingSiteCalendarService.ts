@@ -1,7 +1,7 @@
+
 import ical from 'node-ical';
-import { Cal } from '../../../types/cal';
 import { RoomType } from '@/types/roomType';
-import { sendEmail } from '../services/primaryEmailService';
+import { Cal } from '@/types/cal';
 
 type BookingSite = {
   room: number;
@@ -13,7 +13,7 @@ type BookingSite = {
   roomTypes: RoomType[];
 }
 
-const cals: BookingSite[] = [
+export const bookingSiteCalendars: BookingSite[] = [
   {
     airbnb: 'https://www.airbnb.co.uk/calendar/ical/1103670509214753675.ics?s=4061c4a83819a4f3092c4199241935a5',
     booking: 'https://ical.booking.com/v1/export?t=d76dc22b-9726-4d10-88fa-ddac640d62c5',
@@ -61,24 +61,15 @@ const cals: BookingSite[] = [
   }
 ];
 
-const bookingSiteRoomAvailable = (url, startDate, endDate, room) => {
+export const bookingSiteRoomAvailable = (url, startDate, endDate, room) => {
   return new Promise((resolve, reject) => {
     try{
-    ical.fromURL(url, {}, function(err, data) {
-      
+    ical.fromURL(url, {}, function(err, data) {     
       if (err) reject(`Error parsing ${url} room ${room}: ${err}`);
           
       const entries = Object.entries(data);
       const dates: Cal[] = entries.map(([_k,v]) => v as Cal);   
-      
-      if(dates.some(d => (d.start >= startDate && endDate > d.start) || (d.end > startDate && endDate >= d.end))) {
-        console.log('available', false);
-        console.log(
-          url,
-          room,
-          dates.find(d => (d.start >= startDate && endDate > d.start) || (d.end > startDate && endDate >= d.end))
-        );        
-      }
+
       resolve(!dates.some(d => (d.start >= startDate && endDate > d.start) || (d.end > startDate && endDate >= d.end)));
     });
   } catch (e) {
@@ -87,68 +78,3 @@ const bookingSiteRoomAvailable = (url, startDate, endDate, room) => {
     }
   });
 }
-
-export async function POST(req: Request) {
-  const body = await req.json();
-  const { 
-    startDate: s, 
-    endDate: e, 
-    numberOfAdults,
-    email,
-    name,
-    numberOfChildren,
-    roomType,
-    dinner
-  } = body;
-  const startDate = new Date(s);
-  const endDate = new Date(e);
-
-  const selectedRooms = cals.filter(r => r.max >= (+numberOfAdults + +numberOfChildren) && r.roomTypes.includes(roomType));
-  
-  let possibleRooms = '';
-
-  for (const room of selectedRooms) {
-    const availability = 
-      await Promise.all([
-        room.booking ? bookingSiteRoomAvailable(room.booking, startDate, endDate, room.room) : Promise.resolve(true),
-        room.expedia ? bookingSiteRoomAvailable(room.expedia, startDate, endDate, room.room) : Promise.resolve(true),
-        room.airbnb ? bookingSiteRoomAvailable(room.airbnb, startDate, endDate, room.room) : Promise.resolve(true)
-      ])
-    
-      if(availability.every(r => r)) {
-        possibleRooms += `${ room.room }, `
-      }
-  }
-
-  if (possibleRooms === '') {
-    return new Response('no availability', {
-      headers: { "content-type": "application/json" },
-      status: 404});
-  }
-
-    try {
-      await sendReservationEmail(name, numberOfAdults, numberOfChildren, dinner, possibleRooms, email, startDate, endDate);
-      return new Response(null, { status: 204 });
-    } catch (e) {
-      const { message } = e as { message: string };
-      return new Response(JSON.stringify({
-        message: 'unable to send email',
-        error: message
-      }), {status: 500});
-    }
-  }
-
-  const sendReservationEmail = async (name, adults, children, dinner, possibleRooms, email, startDate, endDate) => {
-      const message = 
-        `new reservation from ${name}
-          dates: ${ startDate } - ${ endDate }
-         adults: ${ adults }
-         children: ${ children }
-         dinner: ${ dinner ? 'Yes' : 'No' }
-         room (any of these): ${possibleRooms.substring(0,possibleRooms.length -1)}
-        `;
-      
-      return await sendEmail(message, `New Booking Request from ${ name }`, email);
-  }
-
-  

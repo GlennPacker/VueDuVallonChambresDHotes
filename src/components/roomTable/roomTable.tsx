@@ -4,11 +4,24 @@ import Icon from '@mdi/react';
 import { mdiAccountOutline } from '@mdi/js';
 import Beds from '@/components/beds/beds';
 import RoomPhotos from "@/components/roomPhotos/roomPhotos";
+import Btn from "@/components/button/Button";
 
 export default function roomTable(props) {
-  const { room } = props;
+  const { room, reserve } = props;
+
   return <div>
-    <div className={styles.roomContainer}>
+    <div className={room.pricePerNight ? styles.prices : styles.noPrices}>
+      <div className={styles.price}>
+
+        {room.pricePerNight && room.pricePerNight === room.totalPrice && <h4>Price Per Night €{room.pricePerNight}</h4>}
+        {room.pricePerNight && room.pricePerNight !== room.totalPrice && <>
+          <h4>Price €{room.totalPrice}</h4>
+          <div>Price Per Night €{room.pricePerNight}</div>
+        </>
+        }
+
+        <Btn click={() => reserve(room)}>Reserve</Btn>
+      </div>
       <div className={styles.room} >
         <h3>{room.roomType}</h3>
       </div>

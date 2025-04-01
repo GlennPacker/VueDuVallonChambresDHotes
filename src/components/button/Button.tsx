@@ -1,3 +1,4 @@
+'use client'
 import { ReactNode } from "react";
 import { Button } from "react-bootstrap";
 
@@ -13,13 +14,20 @@ export default function Btn({
   type = "primary",
   classes = '',
   href,
-  children
+  children,
+  click
 }: props) {
   const buttonClasses = `${type === 'primary' ? 'text-white' : ''} ${classes}`
+
+  const clickHandler = () => {
+    if (click) click();
+    return undefined
+  }
 
   const node = <Button
     variant={type as string}
     className={buttonClasses}
+    onClick={() => clickHandler()}
   >
     {children}
   </Button>;

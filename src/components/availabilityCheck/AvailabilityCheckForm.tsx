@@ -2,15 +2,20 @@
 import { Form, Button, Alert } from "react-bootstrap";
 import { useForm, FieldErrors, Controller } from 'react-hook-form'
 import React from "react";
-import { ReservationForm as ReservationFormModel } from "@/types/reservationFormModels";
+import { Availability, AvailabilityForm, ReservationForm } from "@/types/reservationFormModels";
 import { RoomType } from "@/types/roomType";
 import { checkAvailability } from "@/services/icalService";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import styles from './reservationform.module.scss';
+import styles from './availabilityCheckForm.module.scss';
+import Spinner from 'react-bootstrap/Spinner';
 
-const ReservationForm = () => {
-  const [sent, setSent] = React.useState(false);
+type props = {
+  onAvailability: (onAvailability: Availability | null) => void;
+}
+
+const AvailabilityCheckForm = ({ onAvailability }: props) => {
+  const [loading, setLoading] = React.useState<boolean>();
   const [startDate, setStartDate] = React.useState();
   const [minEndDate, setMinEndDate] = React.useState<Date>();
   const [maxEndDate, setMaxEndDate] = React.useState<Date>();
@@ -18,7 +23,7 @@ const ReservationForm = () => {
   const [numbersHidden, setNumbersHidden] = React.useState(true);
   const [error, setError] = React.useState(false);
   const [noAvailability, setNoAvailability] = React.useState(false);
-
+  
 
   const {
     control,
@@ -29,11 +34,8 @@ const ReservationForm = () => {
   } = useForm({
     mode: "onTouched",
     reValidateMode: "onSubmit",
-    defaultValues: {
-      dinner: '',
-      email: "",
+    defaultValues: {     
       endDate: '',
-      name: "",
       numberOfAdults: "",
       numberOfChildren: "",
       roomType: "",
@@ -46,61 +48,88 @@ const ReservationForm = () => {
       shouldDirty: true
     });
     setStartDate(dateChange);
-    if (!dateChange) return;
+    if(!dateChange) return;
 
     const minEndDate = new Date(dateChange);
     const maxEndDate = new Date(dateChange);
 
     maxEndDate.setDate(maxEndDate.getDate() + 28);
     minEndDate.setDate(minEndDate.getDate() + 1);
-
+    
+    setValue("endDate", minEndDate.toString(), {
+      shouldDirty: true
+    });
     setMinEndDate(minEndDate);
     setMaxEndDate(maxEndDate);
     setEndDate(minEndDate);
+    
+    onAvailability(null);
   };
+
+  const resetAvailability = () => {
+    onAvailability(null);
+  }
 
   const endDateChange = (dateChange) => {
     setValue("endDate", dateChange, {
       shouldDirty: true
     });
     setEndDate(dateChange);
+    
+    resetAvailability();
   };
 
   const roomTypeChange = (roomType) => {
     setNumbersHidden([RoomType.Single, RoomType.Double].includes(roomType));
+    onAvailability(null);
   }
 
   const onSubmit = async (data) => {
-    if (data.roomType === RoomType.Single) {
-      data.numberOfAdults = 1;
-      data.numberOfChildren = 0;
-    }
-    if (data.roomType === RoomType.Double) {
-      data.numberOfAdults = 2;
-      data.numberOfChildren = 0;
-    }
+    setLoading(true);
 
+    const availabilityForm = data as AvailabilityForm;
+    // eslint-disable-next-line prefer-const
+    let { numberOfAdults, numberOfChildren, roomType } = availabilityForm;
+    
+    if (roomType === RoomType.Single) {
+      numberOfAdults = 1;
+      numberOfChildren = 0;
+    }
+    if (roomType === RoomType.Double) {
+      numberOfAdults = 2;
+      numberOfChildren = 0;
+    }
+    
     try {
-      const result = await checkAvailability(data);
+      const { status, availableRooms } = await checkAvailability({ 
+        ...availabilityForm, 
+        endDate: availabilityForm.endDate || endDate,
+        numberOfAdults, 
+        numberOfChildren
+      });
 
-      if(result === 'unavailable') setNoAvailability(true);
-      if(result === 'requested') setSent(true);
+      setLoading(false);
+
+      if(status === 'unavailable') {
+        setNoAvailability(true);
+        return 
+      }
+
+      onAvailability({
+        ...data,
+        numberOfAdults, 
+        numberOfChildren,
+        availableRooms,
+        endDate: availabilityForm.endDate ? new Date(availabilityForm.endDate) : endDate,
+      })
     } catch {
       setError(true)
     }
   }
 
-  const onError = (error: FieldErrors<ReservationFormModel>) => {
+  const onError = (error: FieldErrors<ReservationForm>) => {
     console.log("ERROR:::", error);
   };
-
-  if (sent) {
-    return (
-      <Alert variant="primary">
-        Thank you for your request to book, we will be in touch as soon as possible.
-      </Alert>
-    )
-  }
 
   if(error) {
     return <Alert variant="danger">
@@ -114,39 +143,7 @@ const ReservationForm = () => {
 
   return (
     <>
-    {
-      noAvailability && <Alert variant="danger">
-        No Availability on dates chosen
-      </Alert>
-    }
     <Form onSubmit={handleSubmit(onSubmit, onError)}>
-      <Form.Group className="mb-3" controlId="name">
-        <Form.Label>Name</Form.Label>
-        <Form.Control
-          placeholder="Name"
-          {...register("name", { required: "Name is required" })}
-        />
-        {errors.name && (
-          <Form.Text className="text-danger">
-            {errors.name.message}
-          </Form.Text>
-        )}
-      </Form.Group>
-
-      <Form.Group className="mb-3" controlId="email">
-        <Form.Label>Email</Form.Label>
-        <Form.Control
-          type="email"
-          placeholder="Email"
-          {...register("email", { required: "Email is required" })}
-        />
-        {errors.email && (
-          <Form.Text className="text-danger">
-            {errors.email.message}
-          </Form.Text>
-        )}
-      </Form.Group>
-
       <Form.Group className="mb-3" controlId="roomType">
         <Form.Label>Room Type</Form.Label>
         <Form.Select
@@ -175,6 +172,7 @@ const ReservationForm = () => {
               min: { value: 1, message: 'At least one adults needs to stay' },
               max: { value: 5, message: 'Max adults in one room is 5' }
             })}
+            onBlur={() => resetAvailability() }
           />
           {errors.numberOfAdults && (
             <Form.Text className="text-danger">
@@ -194,6 +192,7 @@ const ReservationForm = () => {
               min: { value: 0, message: 'minus number is invalid' },
               max: { value: 5, message: 'Max children in one room is 3' }
             })}
+            onBlur={() => resetAvailability() }
           />
           {errors.numberOfChildren && (
             <Form.Text className="text-danger">
@@ -207,8 +206,10 @@ const ReservationForm = () => {
         <Form.Label>First Night</Form.Label>
         <br/>
         <Controller
-          name="startDate"
           control={control}
+          {...register("startDate", {
+            required: "First night of stay is required"
+          })}
           render={() => (
             <DatePicker
               minDate={new Date()}
@@ -219,19 +220,27 @@ const ReservationForm = () => {
             />
           )}
         />
+        { errors.startDate && (
+              <Form.Text className="text-danger">
+                {errors.startDate.message}
+              </Form.Text>
+            )
+          }
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="endDate">
         <Form.Label>Last Night</Form.Label>
         <br/>
         <Controller
-          name="endDate"
+          {...register("endDate", {
+            required: "Last night of stay is required"
+          })}
           control={control}
           render={() => (
             <DatePicker
-              disabled={!startDate}
-              minDate={minEndDate}
-              maxDate={maxEndDate}
+              disabled={ !startDate }
+              minDate={ minEndDate }
+              maxDate={ maxEndDate }
               dateFormat="dd MMMM YYYY"
               wrapperClassName={styles.datePicker}
               selected={endDate}
@@ -239,28 +248,39 @@ const ReservationForm = () => {
             />
           )}
         />
+        { errors.endDate && (
+              <Form.Text className="text-danger">
+                {errors.endDate.message}
+              </Form.Text>
+            )
+          }
         </Form.Group>
 
+      <div className="center pb2 pt2">
+      { !loading && 
+        <Button
+          variant="primary"
+          type="submit"
+          className="text-white mb3"
+        >
+          Check Availability
+        </Button>
+      }
+      { loading && 
+        <Spinner animation="border" role="status">
+          <span className="visually-hidden">Loading...</span>
+        </Spinner>
+      }
+     </div> 
 
-
-      <Form.Group className="mb-3" controlId="dinner">
-        <Form.Label>Would you like dinner</Form.Label>
-        <Form.Check
-          type="checkbox"
-          {...register("dinner", {})}
-        />
-      </Form.Group>
-
-      <Button
-        variant="primary"
-        type="submit"
-        className="text-white mb3"
-      >
-        Submit
-      </Button>
+      {
+      noAvailability && <Alert variant="danger">
+        No Availability on dates chosen
+      </Alert>
+    }
     </Form>
     </>
   );
 };
 
-export default ReservationForm;
+export default AvailabilityCheckForm;
