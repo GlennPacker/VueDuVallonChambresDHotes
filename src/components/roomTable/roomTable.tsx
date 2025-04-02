@@ -1,4 +1,4 @@
-"use server";
+"use client";
 import styles from './roomTable.module.scss';
 import CheckedList from "../checkedList/checkedList";
 import Icon from '@mdi/react';
@@ -7,7 +7,7 @@ import Beds from '@/components/beds/beds';
 import RoomPhotos from "@/components/roomPhotos/roomPhotos";
 import BtnClient from "@/components/button/ButtonClient";
 
-export default async function roomTable(props) {
+export default function roomTable(props) {
   const { room, reserveAction } = props;
 
   return <div>
