@@ -10,7 +10,7 @@ export const sendReservationEmail = async ({name, numberOfAdults, numberOfChildr
      Adults: ${ numberOfAdults } ${ numberOfChildren ? `Children: ${ numberOfChildren }` : '' } 
      Dinner: ${ dinner ? 'Yes' : 'No' }
      Room: ${roomType} - room ${room}
-     Price: €${ totalPrice } (€${pricePerNight} per night)
+     Price: €${ totalPrice } ${ totalPrice !== pricePerNight ? `(€${pricePerNight} per night)`: '' }
 
      We will be in touch soon to confirm your booking, if you have not heard anything within 48 hours please drop us an email info@vueduvallon.fr
     `;
