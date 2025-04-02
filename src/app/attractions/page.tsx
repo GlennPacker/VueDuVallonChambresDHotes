@@ -1,7 +1,7 @@
 'use client'
 import AttractionGrid from '@/components/attractionGrid/attractionGrid';
 import AttractionsFilter from '@/components/attractionsFilter/attractionsFilter';
-import BtnServer from '@/components/button/ButtonServer';
+import BtnLink from '@/components/button/ButtonLink';
 import { useState } from 'react';
 import { Container } from 'react-bootstrap';
 import styles from './attractions.module.css';
@@ -22,10 +22,10 @@ const Attractions = () => {
         onChange={value => setFilter(value)}
         val={filter}
       />
-      <BtnServer href="/attractions/lakes">Lakes</BtnServer>
-      <BtnServer href="/attractions/restaurants">Restaurants</BtnServer>
-      <BtnServer href="/attractions/beach">Beach</BtnServer>
-      <BtnServer href="/attractions/localTowns">Local Towns</BtnServer>
+      <BtnLink href="/attractions/lakes">Lakes</BtnLink>
+      <BtnLink href="/attractions/restaurants">Restaurants</BtnLink>
+      <BtnLink href="/attractions/beach">Beach</BtnLink>
+      <BtnLink href="/attractions/localTowns">Local Towns</BtnLink>
     </div>
 
     <AttractionGrid filter={filter} />

@@ -5,7 +5,7 @@ import Icon from '@mdi/react';
 import { mdiAccountOutline } from '@mdi/js';
 import Beds from '@/components/beds/beds';
 import RoomPhotos from "@/components/roomPhotos/roomPhotos";
-import BtnClient from "@/components/button/ButtonClient";
+import BtnClick from "@/components/button/ButtonClick";
 
 export default function roomTable(props) {
   const { room, reserveAction } = props;
@@ -21,7 +21,7 @@ export default function roomTable(props) {
         </>
         }
 
-        <BtnClient click={() => reserveAction(room)}>Reserve</BtnClient>
+        <BtnClick click={() => reserveAction(room)}>Reserve</BtnClick>
       </div>
       <div className={styles.room} >
         <h3>{room.roomType}</h3>

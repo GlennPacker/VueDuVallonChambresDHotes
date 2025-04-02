@@ -1,7 +1,7 @@
 import { Availability, RoomSelected } from "@/types/reservationFormModels";
 import { rooms } from "@/constants/Rooms";
 import { dateDiffInDays } from "@/services/availabilityUtils";
-import RoomTable from "../roomTable/roomTable";
+import RoomTable from "../roomTableClientSide/roomTable";
 
 type props = {
   availability: Availability | null,

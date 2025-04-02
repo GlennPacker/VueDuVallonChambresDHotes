@@ -1,6 +1,6 @@
 
 import styles from "./accommodation.module.scss";
-import RoomTable from "@/components/roomTable2/roomTable";
+import RoomTable from "@/components/roomTableServerSide/roomTable";
 import AccommodationSidePanel from "@/components/accommodationSidePanel/accomodationSidePanel";
 import AccommodationTopPanel from "@/components/accommodationTopPanel/accomodationTopPanel";
 import { rooms } from "@/constants/Rooms";

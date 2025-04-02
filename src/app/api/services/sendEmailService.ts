@@ -12,7 +12,7 @@ export const sendReservationEmail = async ({name, numberOfAdults, numberOfChildr
      Room: ${roomType} - room ${room}
      Price: €${ totalPrice } (€${pricePerNight} per night)
 
-     We will be in touch soon to confirm booking, if you have not heard anything within 48 hours please drop us an email info@vueduvallon.fr
+     We will be in touch soon to confirm your booking, if you have not heard anything within 48 hours please drop us an email info@vueduvallon.fr
     `;
   
   return Promise.all([
