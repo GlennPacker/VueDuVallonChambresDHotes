@@ -17,7 +17,7 @@ export default function Contact() {
           <div className={styles.phone}>
             <strong>Phone:</strong>
             <div className="ps-5">
-              +33 7 70 26 20 89
+              +33 7 70 29 65 62
             </div>
           </div>
           <div className={styles.email}>
