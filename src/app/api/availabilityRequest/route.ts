@@ -1,5 +1,6 @@
 import { bookingSiteCalendars, bookingSiteRoomAvailable } from '@/services/bookingSiteCalendarService';
 import { sendReservationEmail } from '../services/sendEmailService';
+import { createBooking } from '@/services/supabaseService';
 
 export async function POST(
   req: Request,
@@ -34,12 +35,20 @@ export async function POST(
   }
 
   try {
-    await sendReservationEmail({ 
-      ...body,
-      startDate,
-      endDate,
-      sendTo: [process.env.EMAIL, process.env.EMAIL2]
-    });
+    await Promise.all([
+      createBooking({
+        ...body,
+        startDate,
+        endDate,
+      }),
+      sendReservationEmail({ 
+        ...body,
+        startDate,
+        endDate,
+        sendTo: [process.env.EMAIL, process.env.EMAIL2]
+      })
+    ]);
+
     return new Response(null, { status: 204 });
   } catch (e) {
     const { message } = e as { message: string };
