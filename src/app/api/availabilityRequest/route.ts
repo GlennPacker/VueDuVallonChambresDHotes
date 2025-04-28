@@ -54,7 +54,7 @@ export async function POST(
     const { message } = e as { message: string };
 
     return new Response(JSON.stringify({
-      message: 'unable to send email',
+      message: 'unable to send email or db issues',
       error: message
     }), {
       status: 500,
