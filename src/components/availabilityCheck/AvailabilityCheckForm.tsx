@@ -203,12 +203,12 @@ const AvailabilityCheckForm = ({ onAvailability }: props) => {
       </>}
 
       <Form.Group className="mb-3" controlId="startDate">
-        <Form.Label>First Night</Form.Label>
+          <Form.Label>Check in</Form.Label>
         <br/>
         <Controller
           control={control}
           {...register("startDate", {
-            required: "First night of stay is required"
+            required: "Check in (first night of stay) is required"
           })}
           render={() => (
             <DatePicker
@@ -229,11 +229,11 @@ const AvailabilityCheckForm = ({ onAvailability }: props) => {
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="endDate">
-        <Form.Label>Last Night</Form.Label>
+          <Form.Label>Check out</Form.Label>
         <br/>
         <Controller
           {...register("endDate", {
-            required: "Last night of stay is required"
+            required: "Check out (day of departure) is required"
           })}
           control={control}
           render={() => (
