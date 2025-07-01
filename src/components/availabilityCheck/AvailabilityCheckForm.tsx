@@ -126,7 +126,8 @@ const AvailabilityCheckForm = ({ onAvailability }: props) => {
         numberOfAdults, 
         numberOfChildren,
         availableRooms,
-        endDate: availabilityForm.endDate ? new Date(availabilityForm.endDate) : endDate,
+        startDate: new Date(startUTC),
+        endDate: new Date(endUTC),
       })
     } catch {
       setError(true)
