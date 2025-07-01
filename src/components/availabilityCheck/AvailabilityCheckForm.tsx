@@ -101,9 +101,15 @@ const AvailabilityCheckForm = ({ onAvailability }: props) => {
     }
     
     try {
+      const end = new Date(availabilityForm.endDate || endDate);
+      const endUTC = new Date(Date.UTC(end.getFullYear(), end.getMonth(), end.getDate()));
+      const start = availabilityForm.startDate;
+      const startUTC = new Date(Date.UTC(start.getFullYear(), start.getMonth(), start.getDate()));
+
       const { status, availableRooms } = await checkAvailability({ 
         ...availabilityForm, 
-        endDate: availabilityForm.endDate || endDate,
+        startDate: new Date(startUTC),
+        endDate: new Date(endUTC),
         numberOfAdults, 
         numberOfChildren
       });
