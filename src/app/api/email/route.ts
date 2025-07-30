@@ -1,5 +1,6 @@
 
 import { sendEmail } from '../services/primaryEmailService';
+import { secondarySendEmail } from '../services/secondaryEmailService';
 
 export async function POST(req: Request) {
   const body = await req.json();
@@ -20,5 +21,8 @@ export async function POST(req: Request) {
 const sendContactEmail = (body: any) => {
   const { message, name, email } = body;
   
-  return sendEmail(message, `Message from ${name} (${email})`, email)
+  return Promise.allSettled([
+    sendEmail(message, `Message from ${name} (${email})`, email),
+    secondarySendEmail(message, `Message from ${name} (${email})`, email),
+  ]);
 }

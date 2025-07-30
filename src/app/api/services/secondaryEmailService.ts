@@ -36,7 +36,7 @@ const sendMailPromise = () =>
   });
 
 try {
-  if (!process.env.EMAIL) return NextResponse.json({ error: 'Missing Env Vars' }, { status: 500 });
+  if (!process.env.EMAIL2) return NextResponse.json({ error: 'Missing Env Vars' }, { status: 500 });
 
   return await sendMailPromise()
     .then(() => NextResponse.json({ message: 'Email Sent' }, { status: 200 }))
