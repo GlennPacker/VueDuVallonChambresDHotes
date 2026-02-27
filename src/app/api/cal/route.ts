@@ -69,16 +69,8 @@ const bookingSiteRoomAvailable = (url, startDate, endDate, room) => {
       if (err) reject(`Error parsing ${url} room ${room}: ${err}`);
           
       const entries = Object.entries(data);
-      const dates: Cal[] = entries.map(([_k,v]) => v as Cal);   
-      
-      if(dates.some(d => (d.start >= startDate && endDate > d.start) || (d.end > startDate && endDate >= d.end))) {
-        console.log('available', false);
-        console.log(
-          url,
-          room,
-          dates.find(d => (d.start >= startDate && endDate > d.start) || (d.end > startDate && endDate >= d.end))
-        );        
-      }
+      const dates: Cal[] = entries.map(([_k,v]) => v as Cal);       
+
       resolve(!dates.some(d => (d.start >= startDate && endDate > d.start) || (d.end > startDate && endDate >= d.end)));
     });
   } catch (e) {
