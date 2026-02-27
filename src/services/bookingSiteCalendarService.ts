@@ -16,7 +16,7 @@ type BookingSite = {
 export const bookingSiteCalendars: BookingSite[] = [
   {
     airbnb: 'https://www.airbnb.co.uk/calendar/ical/1103670509214753675.ics?s=4061c4a83819a4f3092c4199241935a5',
-    booking: 'https://ical.booking.com/v1/export?t=569ed396-9826-46a6-a266-de5527177048',
+    booking: 'https://ical.booking.com/v1/export?t=13febe63-f33f-4969-b546-20aad8386b34',
     expedia: 'https://www.expediapartnercentral.com/calendars/export/497318acaa7948de8be579b92867b552.ics',
     max: 3,
     maxChildren: 2,
@@ -25,7 +25,7 @@ export const bookingSiteCalendars: BookingSite[] = [
   },
   {
     airbnb: 'https://www.airbnb.co.uk/calendar/ical/1104925602556679983.ics?s=8b82ff90fd0468f3e147c3516457643b',
-    booking: 'https://ical.booking.com/v1/export?t=d919e20c-dad3-4e0d-a114-a56af105fb7b',
+    booking: 'https://ical.booking.com/v1/export/t/45062b37-390c-477e-9bbc-726c2144eacf.ics',
     expedia: 'https://www.expediapartnercentral.com/calendars/export/2c15544415c64929b173e8c408e38625.ics',
     max: 2,
     maxChildren: 0,
@@ -34,7 +34,7 @@ export const bookingSiteCalendars: BookingSite[] = [
   },
   {
     airbnb: 'https://www.airbnb.co.uk/calendar/ical/1105085603170321722.ics?s=ffe7244b2d963919c0cfbf769eb39a6a',
-    booking: 'https://ical.booking.com/v1/export?t=f19e5936-4e41-47e8-baf3-fc14c5327e5e',
+    booking: 'https://ical.booking.com/v1/export?t=f1dc8938-d6a3-497f-9962-df681f24f43a',
     expedia: 'https://www.expediapartnercentral.com/calendars/export/2cfa7a76a12f4b1099c503691fcb4fb1.ics',
     max: 4,
     maxChildren: 2,
@@ -43,7 +43,7 @@ export const bookingSiteCalendars: BookingSite[] = [
   },
   {
     airbnb: 'https://www.airbnb.co.uk/calendar/ical/1106588938559446603.ics?s=a23bec46288cad6a90d181128ceeff9c',
-    booking: 'https://ical.booking.com/v1/export?t=dcc747b7-0107-495d-9560-0372853189b7',
+    booking: 'https://ical.booking.com/v1/export?t=248f3e91-686e-4d21-8454-f4be5b94b296',
     expedia: 'https://www.expediapartnercentral.com/calendars/export/2ff59ca18f7041c39a65819e8aa8dbd0.ics',
     max: 2,
     maxChildren: 0,
@@ -52,7 +52,7 @@ export const bookingSiteCalendars: BookingSite[] = [
   },
   {
     airbnb: 'https://www.airbnb.co.uk/calendar/ical/1106948067121306226.ics?s=c07a87d50049d27e683c109538ecf10d',
-    booking: 'https://ical.booking.com/v1/export?t=d132db2c-a570-4130-82ca-585cb62594df',
+    booking: 'https://ical.booking.com/v1/export?t=f3c1efad-d69f-43dc-bd65-9f036127af47',
     expedia: 'https://www.expediapartnercentral.com/calendars/export/a4fa84a1536a46cca75ba3c5fffd2b3f.ics',
     max: 5,
     maxChildren: 3,
