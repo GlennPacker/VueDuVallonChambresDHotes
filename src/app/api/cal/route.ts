@@ -16,7 +16,7 @@ type BookingSite = {
 const cals: BookingSite[] = [
   {
     airbnb: 'https://www.airbnb.co.uk/calendar/ical/1103670509214753675.ics?s=4061c4a83819a4f3092c4199241935a5',
-    booking: 'https://ical.booking.com/v1/export?t=d76dc22b-9726-4d10-88fa-ddac640d62c5',
+    booking: 'https://ical.booking.com/v1/export?t=fc42c238-f127-42ef-b1d1-f29eb20f6799',
     expedia: 'https://www.expediapartnercentral.com/calendars/export/497318acaa7948de8be579b92867b552.ics',
     max: 3,
     maxChildren: 2,
