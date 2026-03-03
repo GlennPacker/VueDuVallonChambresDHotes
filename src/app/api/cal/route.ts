@@ -107,9 +107,7 @@ export async function POST(req: Request) {
         room.airbnb ? bookingSiteRoomAvailable(room.airbnb, startDate, endDate, room.room) : Promise.resolve(true)
       ])
     
-      if(availability.every(r => r)) {
-        possibleRooms += `${ room.room }, `
-      }
+      if(availability.every(r => r)) possibleRooms += `${ room.room }, `
   }
 
   if (possibleRooms === '') {
