@@ -103,7 +103,7 @@ export async function POST(req: Request) {
     const availability = 
       await Promise.all([
         room.booking ? bookingSiteRoomAvailable(room.booking, startDate, endDate, room.room) : Promise.resolve(true),
-       // room.expedia ? bookingSiteRoomAvailable(room.expedia, startDate, endDate, room.room) : Promise.resolve(true),
+        room.expedia ? bookingSiteRoomAvailable(room.expedia, startDate, endDate, room.room) : Promise.resolve(true),
         room.airbnb ? bookingSiteRoomAvailable(room.airbnb, startDate, endDate, room.room) : Promise.resolve(true)
       ])
     
