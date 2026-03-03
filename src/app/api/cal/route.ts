@@ -116,29 +116,29 @@ export async function POST(req: Request) {
       status: 404});
   }
 
-    try {
-      await sendReservationEmail(name, numberOfAdults, numberOfChildren, dinner, possibleRooms, email, startDate, endDate);
-      return new Response(null, { status: 204 });
-    } catch (e) {
-      const { message } = e as { message: string };
-      return new Response(JSON.stringify({
-        message: 'unable to send email',
-        error: message
-      }), {status: 500});
-    }
+  try {
+    await sendReservationEmail(name, numberOfAdults, numberOfChildren, dinner, possibleRooms, email, startDate, endDate);
+    return new Response(null, { status: 204 });
+  } catch (e) {
+    const { message } = e as { message: string };
+    return new Response(JSON.stringify({
+      message: 'unable to send email',
+      error: message
+    }), {status: 500});
   }
+}
 
-  const sendReservationEmail = async (name, adults, children, dinner, possibleRooms, email, startDate, endDate) => {
-      const message = 
-        `new reservation from ${name}
-          dates: ${ startDate } - ${ endDate }
-         adults: ${ adults }
-         children: ${ children }
-         dinner: ${ dinner ? 'Yes' : 'No' }
-         room (any of these): ${possibleRooms.substring(0,possibleRooms.length -1)}
-        `;
-      
-      return await sendEmail(message, `New Booking Request from ${ name }`, email);
-  }
+const sendReservationEmail = async (name, adults, children, dinner, possibleRooms, email, startDate, endDate) => {
+  const message = 
+    `new reservation from ${name}
+      dates: ${ startDate } - ${ endDate }
+      adults: ${ adults }
+      children: ${ children }
+      dinner: ${ dinner ? 'Yes' : 'No' }
+      room (any of these): ${possibleRooms.substring(0,possibleRooms.length -1)}
+    `;
+  
+  return await sendEmail(message, `New Booking Request from ${ name }`, email);
+}
 
   
