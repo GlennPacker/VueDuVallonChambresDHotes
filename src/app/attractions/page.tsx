@@ -22,10 +22,11 @@ const Attractions = () => {
         onChange={value => setFilter(value)}
         val={filter}
       />
-      <BtnLink href="/attractions/lakes">Lakes</BtnLink>
-      <BtnLink href="/attractions/restaurants">Restaurants</BtnLink>
-      <BtnLink href="/attractions/beach">Beach</BtnLink>
-      <BtnLink href="/attractions/localTowns">Local Towns</BtnLink>
+      <div className={styles.linkButtons}>
+        <BtnLink href="/attractions/lakes">Lakes</BtnLink>
+        <BtnLink href="/attractions/restaurants">Restaurants</BtnLink>
+        <BtnLink href="/attractions/beach">Beach</BtnLink>
+      </div>
     </div>
 
     <AttractionGrid filter={filter} />

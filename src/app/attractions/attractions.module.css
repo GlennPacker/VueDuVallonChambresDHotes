@@ -2,3 +2,8 @@
   padding: 40px 0;
   width: 100%;
 }
+.linkButtons
+{
+  display: flex;
+  gap: 1rem;
+}

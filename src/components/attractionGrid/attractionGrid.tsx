@@ -9,7 +9,8 @@ type props = {
   filter?: string | null
 }
 
-const AttractionGrid = ({ filter }: props) => {
+const AttractionGrid = ({filter}: props) => {
+  
   return <div className={styles.container}>
     {attractions
       .filter(({ tags }) =>

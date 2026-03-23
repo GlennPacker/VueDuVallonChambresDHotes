@@ -3,15 +3,28 @@ import { Tag } from "@/components/attraction/attraction";
 import { Container } from "react-bootstrap";
 
 const Attractions = ({ params }) => {
-  console.log(params);
+  const urlToTagMap = {
+    beach: 'Beach',
+    cycling: 'Cycling',
+    kayaking: 'Kayaking',
+    historicalinterest: 'HistoricalInterest',
+    lakes: 'Lakes',
+    localtown: 'LocalTown',
+    mountainbiking: 'MountainBiking',
+    naturewalk: 'NatureWalk',
+    paragliding: 'Paragliding',
+    walks: 'Walks',
+    woodlands: 'Woodlands'
+  }
+  const tag = urlToTagMap[params.activity];
+
   return <Container>
     <h1 className="text-center mt-5 mb-3">
-      {JSON.stringify(params)}
       Vue Du Vallon Haute Vienne
     </h1>
     <h2>Local Lakes</h2>
 
-    <AttractionGrid filter={Tag[params.activity]} />
+    <AttractionGrid filter={tag} />
   </Container>
 }
 

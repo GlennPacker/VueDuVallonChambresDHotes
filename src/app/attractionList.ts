@@ -32,7 +32,8 @@ const attractionList: TAttraction[] = [
     img: 'bessiness.webp',
     text: `The town of Bessines sur Gartempe is 8 mins drive away and has a local market, 2 supermarkets, bars, restaurants and small shops.`,
     tags: [
-      Tag.LocalTown
+      Tag.LocalTown,
+      Tag.Beach
     ]
   },
   {
@@ -113,7 +114,8 @@ const attractionList: TAttraction[] = [
       Tag.Lakes,
       Tag.NatureWalk,
       Tag.Cycling,
-      Tag.Kayaking
+      Tag.Kayaking,
+      Tag.Beach
     ]
   },
   {
