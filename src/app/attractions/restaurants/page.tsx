@@ -7,6 +7,7 @@ const Attractions = () => {
     <h1 className="text-center mt-5 mb-3">
       Vue Du Vallon Haute Vienne
     </h1>
+    
     <h2>Local Restaurants</h2>
 
     <AttractionGrid filter={Tag.LocalTown} />
