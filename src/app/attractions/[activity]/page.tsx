@@ -1,5 +1,4 @@
 import AttractionGrid from "@/components/attractionGrid/attractionGrid";
-import { Tag } from "@/components/attraction/attraction";
 import { Container } from "react-bootstrap";
 
 const Attractions = ({ params }) => {
